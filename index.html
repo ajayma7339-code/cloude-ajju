@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BCA 3rd Year Notes Hub</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121a33;
+      --card: #182447;
+      --card-border: #293b72;
+      --text: #f3f6ff;
+      --muted: #b6c4f3;
+      --accent: #74a5ff;
+      --accent-2: #56e5c0;
+      --danger: #ff8b8b;
+      --warning: #ffd27d;
+      --ok: #9effc6;
+      --radius: 14px;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top right, #1d2e61, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1150px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 70px;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, rgba(116, 165, 255, 0.18), rgba(86, 229, 192, 0.12));
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 { margin: 0 0 12px; }
+    h1 { font-size: clamp(1.7rem, 3.5vw, 2.7rem); }
+    h2 { font-size: 1.5rem; margin-bottom: 14px; }
+
+    p { margin: 0 0 10px; color: var(--muted); }
+
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .badge {
+      font-size: 0.87rem;
+      border: 1px solid #5574c9;
+      background: rgba(15, 26, 58, 0.65);
+      color: #d5e2ff;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    ul { padding-left: 20px; margin: 8px 0 0; }
+    li { margin: 7px 0; color: #dbe5ff; }
+
+    .resource-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: #3f62c3;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button.secondary { background: #2a3f7e; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .resource-list {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .resource-item {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 13px;
+      background: #122042;
+    }
+
+    .resource-top {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .status {
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid transparent;
+    }
+
+    .status.idle { color: #c4d3ff; background: #2a3764; border-color: #4e5f9e; }
+    .status.loading { color: #ffe8b0; background: #43340d; border-color: #b8902c; }
+    .status.success { color: #b2ffe3; background: #0f4334; border-color: #2d9d7a; }
+    .status.error { color: #ffd1d1; background: #4c1f28; border-color: #b45766; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.76rem;
+      overflow-wrap: anywhere;
+      color: #bed1ff;
+      margin-bottom: 10px;
+    }
+
+    .resource-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: #d5e1ff;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid #4b65af;
+      border-radius: 8px;
+      padding: 8px 9px;
+      background: #0f1a36;
+      color: white;
+    }
+
+    .api-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      background: #0c1630;
+      border: 1px solid #324b8c;
+      border-radius: 8px;
+      padding: 10px;
+      max-height: 260px;
+      overflow: auto;
+      font-size: 0.85rem;
+      color: #d7e4ff;
+      white-space: pre-wrap;
+    }
+
+    footer { margin-top: 30px; color: #9fb3e8; font-size: 0.9rem; }
+    a { color: var(--accent-2); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>BCA 3rd Year Notes + Exam Preparation + Industry Projects</h1>
+      <p>
+        Complete student dashboard for BCA final year: notes planning, exam strategy, roadmap from zero to full projects,
+        and free course APIs for real resources.
+      </p>
+      <div class="badge-row">
+        <span class="badge">📚 Semester 5 + 6 support</span>
+        <span class="badge">🧠 Exam-ready revision system</span>
+        <span class="badge">💻 Industry-level project path</span>
+        <span class="badge">🆓 Free learning resources</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Core Notes Plan (BCA 3rd Year)</h2>
+        <ul>
+          <li><strong>Data Science / AI Basics:</strong> Python, NumPy, Pandas, model basics, mini datasets.</li>
+          <li><strong>Cloud Computing:</strong> Virtualization, SaaS/PaaS/IaaS, AWS/Azure fundamentals.</li>
+          <li><strong>Web Technologies:</strong> HTML, CSS, JavaScript, React basics, API integration.</li>
+          <li><strong>Computer Networks:</strong> OSI/TCP-IP, routing, switching, DNS, subnetting.</li>
+          <li><strong>Software Engineering:</strong> SDLC, Agile, UML, requirement analysis, testing.</li>
+          <li><strong>Project Work:</strong> Proposal → architecture → implementation → viva prep notes.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Exam Preparation Strategy</h2>
+        <ul>
+          <li><strong>Daily 2-2-1 method:</strong> 2 hours theory, 2 hours coding, 1 hour revision.</li>
+          <li><strong>Weekly plan:</strong> 5 days preparation + 1 day mock tests + 1 day weak-topic fix.</li>
+          <li><strong>Question bank:</strong> Long answers, definitions, diagrams, important formulas.</li>
+          <li><strong>Last 30 days:</strong> Previous year papers + practical file + viva questions.</li>
+          <li><strong>Memory hack:</strong> Create one-page chapter summaries for quick pre-exam recall.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Industry-level Projects (0 → Complete)</h2>
+        <ul>
+          <li><strong>Level 1:</strong> To-do app, calculator API app, weather dashboard.</li>
+          <li><strong>Level 2:</strong> Student management system (auth + CRUD + reports).</li>
+          <li><strong>Level 3:</strong> E-learning portal (video modules + progress tracking).</li>
+          <li><strong>Level 4:</strong> Placement prep platform (tests + analytics + admin panel).</li>
+          <li><strong>Deployment:</strong> GitHub, Vercel/Netlify, API hosting and CI/CD basics.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Free Resource API Explorer</h2>
+      <p>Use the buttons below to fetch free courses/resources. Add API keys only when a provider requires one.</p>
+
+      <div class="resource-controls">
+        <button id="load-all">Load all resources</button>
+        <button id="clear-all" class="secondary">Clear results</button>
+      </div>
+
+      <div id="resource-list" class="resource-list"></div>
+    </section>
+
+    <footer>
+      Designed for BCA students. Tip: Always cross-check exam syllabus with your university circular.
+    </footer>
+  </div>
+
+  <script>
+    const APIs = [
+      { name: 'Learnvern', url: 'https://www.learnvern.com/api/v2/courses?lang=en', note: 'Public course feed' },
+      { name: 'Class Central', url: 'https://www.classcentral.com/api/courses?limit=100', note: 'May enforce strict CORS limits' },
+      { name: 'OpenCulture (via AllOrigins)', url: 'https://api.allorigins.win/raw?url=https://www.openculture.com/freeonlinecourses', note: 'Proxy raw page output' },
+      { name: 'DigitalDefynd', url: 'https://digitaldefynd.com/api/v1/best-courses', note: 'Third-party API availability may vary' },
+      { name: 'The Odin Project', url: 'https://www.theodinproject.com/api/v1/paths.json', note: 'Learning paths in JSON' },
+      { name: 'Great Learning', url: 'https://api.mygreatlearning.com/academy/api/v4/courses?limit=100&page=1&free=true', note: 'Free courses query' },
+      { name: 'Alison', url: 'https://alison.com/api/v2/courses/search?language=en&limit=50&page=1&is_free=true', note: 'Search free courses' }
+    ];
+
+    const resourceList = document.getElementById('resource-list');
+    const loadAllBtn = document.getElementById('load-all');
+    const clearAllBtn = document.getElementById('clear-all');
+
+    function createResourceCard(api, idx) {
+      const item = document.createElement('article');
+      item.className = 'resource-item';
+      item.innerHTML = `
+        <div class="resource-top">
+          <strong>${api.name}</strong>
+          <span class="status idle" id="status-${idx}">Idle</span>
+        </div>
+        <div class="mono">${api.url}</div>
+        <p>${api.note}</p>
+
+        <div class="api-options">
+          <div>
+            <label for="key-${idx}">API Key (optional)</label>
+            <input id="key-${idx}" placeholder="Paste API key if required" />
+          </div>
+          <div>
+            <label for="header-${idx}">Key header option</label>
+            <select id="header-${idx}">
+              <option value="">No key header</option>
+              <option value="Authorization">Authorization: Bearer KEY</option>
+              <option value="x-api-key">x-api-key: KEY</option>
+              <option value="api-key">api-key: KEY</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="resource-actions">
+          <button data-index="${idx}" class="fetch-btn">Fetch</button>
+          <button data-index="${idx}" class="open-btn">Open URL</button>
+        </div>
+
+        <div class="result" id="result-${idx}">No data loaded yet.</div>
+      `;
+      resourceList.appendChild(item);
+    }
+
+    function setStatus(idx, type, text) {
+      const statusEl = document.getElementById(`status-${idx}`);
+      statusEl.className = `status ${type}`;
+      statusEl.textContent = text;
+    }
+
+    function showResult(idx, content) {
+      document.getElementById(`result-${idx}`).textContent = content;
+    }
+
+    async function fetchResource(idx) {
+      const api = APIs[idx];
+      const key = document.getElementById(`key-${idx}`).value.trim();
+      const headerType = document.getElementById(`header-${idx}`).value;
+
+      const headers = {};
+      if (key && headerType === 'Authorization') {
+        headers['Authorization'] = `Bearer ${key}`;
+      } else if (key && headerType) {
+        headers[headerType] = key;
+      }
+
+      setStatus(idx, 'loading', 'Loading');
+      showResult(idx, 'Fetching data...');
+
+      try {
+        const response = await fetch(api.url, { headers });
+        const text = await response.text();
+
+        if (!response.ok) {
+          setStatus(idx, 'error', `HTTP ${response.status}`);
+          showResult(idx, `Failed to load. HTTP ${response.status}\n\n${text.slice(0, 900)}`);
+          return;
+        }
+
+        let parsed = text;
+        try {
+          parsed = JSON.stringify(JSON.parse(text), null, 2);
+        } catch {
+          // keep raw text
+        }
+
+        setStatus(idx, 'success', 'Loaded');
+        showResult(idx, parsed.slice(0, 8000));
+      } catch (error) {
+        setStatus(idx, 'error', 'Error');
+        showResult(
+          idx,
+          `Network/CORS error: ${error.message}\n\nTip: If blocked in browser, open API URL directly or use your backend proxy.`
+        );
+      }
+    }
+
+    function bindEvents() {
+      resourceList.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+
+        if (target.classList.contains('fetch-btn')) {
+          const idx = Number(target.dataset.index);
+          fetchResource(idx);
+        }
+
+        if (target.classList.contains('open-btn')) {
+          const idx = Number(target.dataset.index);
+          window.open(APIs[idx].url, '_blank', 'noopener,noreferrer');
+        }
+      });
+
+      loadAllBtn.addEventListener('click', async () => {
+        loadAllBtn.disabled = true;
+        for (let i = 0; i < APIs.length; i += 1) {
+          // sequential to avoid rate-limit bursts
+          // eslint-disable-next-line no-await-in-loop
+          await fetchResource(i);
+        }
+        loadAllBtn.disabled = false;
+      });
+
+      clearAllBtn.addEventListener('click', () => {
+        APIs.forEach((_, idx) => {
+          setStatus(idx, 'idle', 'Idle');
+          showResult(idx, 'No data loaded yet.');
+          document.getElementById(`key-${idx}`).value = '';
+          document.getElementById(`header-${idx}`).value = '';
+        });
+      });
+    }
+
+    APIs.forEach(createResourceCard);
+    bindEvents();
+  </script>
+</body>
+</html>
